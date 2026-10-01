@@ -56,7 +56,11 @@ As fotos dos quartos são `<img>` apontando para o Unsplash. Não dependem do ot
 
 Repositório: https://github.com/giovanistefani/pousada
 
-Em 2026-10-01 esse repositório ainda não tinha commits, e a CLI do Netlify nesta máquina respondia `Not logged in`. Sem login não há URL. Sem commit autorizado, a integração Git também não constrói o site.
+Site publicado: https://pousada-villa-serena-demo.netlify.app
+
+Painel: https://pousada-villa-serena-demo.netlify.app/admin/dashboard
+
+O primeiro build disparado pelo GitHub falhou ao clonar o repositório (`Host key verification failed`). O endereço acima é o deploy feito pela CLI, com `NEXT_PUBLIC_DEMO_ONLY=true` vindo do `netlify.toml`. Não há variáveis do Supabase nesse site.
 
 Quando houver autorização para commit e push na branch `main`:
 

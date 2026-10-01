@@ -1,6 +1,6 @@
 # Relatório — publicação no Netlify
 
-Data: 2026-10-01. **Não houve deploy.** O sistema não está pronto para produção.
+Data: 2026-10-01. A demonstração está em https://pousada-villa-serena-demo.netlify.app. O sistema não está pronto para produção.
 
 ## 1. Diagnóstico inicial
 
@@ -22,7 +22,7 @@ Netlify CLI: `Not logged in`. Não há site vinculado nesta máquina. Não exist
 - `docs/deploy/NETLIFY_DEMONSTRACAO.md`
 - `docs/deploy/RELATORIO_PUBLICACAO_NETLIFY.md`
 
-Nada de migration, schema, segredo ou commit.
+Nada de migration, schema ou segredo. O commit inicial da `main` é `3c37797`.
 
 ## 3. Configurações realizadas
 
@@ -46,19 +46,29 @@ Sem `NEXT_PUBLIC_DEMO_ONLY`, o comportamento local continua o mesmo: sem as chav
 
 ## 6. URL publicada
 
-**BLOCKED.** A CLI não está autenticada (`npx netlify status` → `Not logged in`). Nenhuma URL foi criada. Não afirmo que o site está no ar.
+**PASS.** https://pousada-villa-serena-demo.netlify.app
+
+Deploy `6abea238cdb667e2b8939e91`, feito pela CLI em 2026-10-01. O build automático do GitHub falhou na clonagem (`Host key verification failed`) e não é o que está no ar.
 
 ## 7. Branch publicada
 
-**BLOCKED.** A branch local é `main` e não tem commits. Nada foi enviado ao GitHub. Commit e push não foram feitos: a publicação pediu autorização explícita antes dessas ações.
+**PASS** no GitHub. Commit `3c37797` na `main`: https://github.com/giovanistefani/pousada
+
+O site no Netlify está ligado a esse repositório, mas o build via Git não concluiu. A URL de produção veio do upload da CLI.
 
 ## 8. Validação do fluxo público
 
-**NOT TESTED** no ambiente remoto. Não existe URL. O fluxo local já tinha sido exercido na implementação do MVP.
+**PASS** em https://pousada-villa-serena-demo.netlify.app
+
+A página abre, mostra a faixa de demonstração e as fotos dos quartos. A busca de 01/10/2026 a 02/10/2026 deixa a Suíte Master e o Chalé Mirante indisponíveis. A solicitação do Chalé Jardim (Helena Demonstração, VS-6508) mostrou a mensagem de recebimento e desabilitou o botão daquele quarto.
 
 ## 9. Validação do painel administrativo
 
-**NOT TESTED** no ambiente remoto, pelo mesmo motivo.
+**PASS** em `/admin/dashboard`, sem login, com a faixa **AMBIENTE DEMONSTRATIVO — DADOS FICTÍCIOS — OPERAÇÕES SIMULADAS**.
+
+A solicitação VS-6508 foi confirmada. Os indicadores passaram a 2 solicitações e 3 confirmadas. O calendário mostra Helena. Webhook de pagamento e iCal respondem 401. Nenhuma requisição a `supabase.co` apareceu nesse fluxo.
+
+Restauração no site publicado: **NOT TESTED** neste acesso. O botão está na tela; a operação já tinha sido coberta localmente.
 
 ## 10. Limitações identificadas
 
@@ -69,13 +79,10 @@ Sem `NEXT_PUBLIC_DEMO_ONLY`, o comportamento local continua o mesmo: sem as chav
 
 ## 11. Pendências para produção
 
-- Autenticar a CLI (`npx netlify login`) ou importar o repositório em app.netlify.com depois de existir um commit em `main`.
-- Autorizar commit e push se a publicação for pela integração Git.
-- Confirmar a URL e repetir os testes do portal, do painel, da faixa, da restauração e do isolamento.
-- Produto real, em outro momento e em outro site: Supabase, login, e-mail e as regras do banco. Este deploy não faz isso.
+- O clone automático do GitHub no Netlify falhou. Um push novo pode não atualizar o site até essa conexão ser refeita, ou até um novo `npx netlify deploy --build --prod`.
+- Isolamento em outro navegador no site publicado: **NOT TESTED**. O estado continua só no `localStorage` de cada navegador.
+- Produto real, em outro site e sem `NEXT_PUBLIC_DEMO_ONLY`: Supabase, login, e-mail e as regras do banco. Este endereço não faz isso.
 
-## Como destravar
+## Atualizar este site
 
-1. `npx netlify login`
-2. Autorizar o commit da branch `main` e o push para https://github.com/giovanistefani/pousada, ou autorizar só `npx netlify deploy --build --prod` num site novo, sem variáveis do Supabase.
-3. Testar a URL e atualizar este relatório. Não declarar produção.
+Enquanto o clone do GitHub falhar, publique de novo com `npx netlify deploy --build --prod` na pasta do projeto, já ligada a `pousada-villa-serena-demo`. Não cadastre variáveis do Supabase. Não declare produção.

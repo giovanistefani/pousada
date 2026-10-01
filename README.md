@@ -69,7 +69,7 @@ Com as variáveis preenchidas, `/admin` volta a exigir login de equipe e as rese
 
 O site demonstrativo no Netlify **não** usa Supabase, login, e-mail nem pagamento. O painel `/admin/dashboard` é público de propósito e só contém dados fictícios. Cada navegador guarda as solicitações em `localStorage` (`pousada-demo-v1`). Outro computador não vê o que foi feito aqui. Limpar os dados do site apaga a sessão. **Restaurar dados demonstrativos** volta ao cenário inicial. Não há banco compartilhado no servidor.
 
-A URL pública ainda não foi confirmada. O passo a passo está em `docs/deploy/NETLIFY_DEMONSTRACAO.md`.
+A demonstração publicada está em https://pousada-villa-serena-demo.netlify.app. O painel é https://pousada-villa-serena-demo.netlify.app/admin/dashboard. O passo a passo está em `docs/deploy/NETLIFY_DEMONSTRACAO.md`.
 
 Para subir localmente, sem variáveis:
 
