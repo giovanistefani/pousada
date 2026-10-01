@@ -1,0 +1,20 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # Trava esta publicação na demonstração. Não cadastre variáveis do Supabase aqui.
+  NEXT_PUBLIC_DEMO_ONLY = "true"
+
+# O adaptador OpenNext do Next.js é aplicado automaticamente pelo Netlify.
+# Não fixe @netlify/plugin-nextjs aqui: isso desliga as atualizações do runtime.
+# O guia antigo pede Node 20 e esse plugin. Esta versão do Next.js não usa isso.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
